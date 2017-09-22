@@ -4,7 +4,7 @@ import io, sys
 from os import path
 from setuptools import setup, find_packages
 
-version = '1.1.0'
+version = '1.1.1'
 setup_requires = []
 
 parent_dir = path.abspath(path.dirname(__file__))
