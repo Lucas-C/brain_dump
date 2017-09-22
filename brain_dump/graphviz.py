@@ -22,7 +22,7 @@ import locale, pydot, sys
 from .parsers.indented_text_graph import parse as parse_text_graph
 
 
-def create_solarized_mindmap_from_file(input_filepath, layout='twopi', font='arial', hide_branches_from_id=None, gen_dot_file=False, root_label=None):
+def create_solarized_mindmap_img(input_filepath, layout='twopi', font='arial', hide_branches_from_id=None, gen_dot_file=False, root_label=None):
     assert locale.getdefaultlocale()[1] == 'UTF-8' # needed to print 'Duplicate content' warning without error and to bypass pydot Dot.write default raw formatting on line 1769
     with open(input_filepath) as txt_file:
         text = txt_file.read()
@@ -33,20 +33,20 @@ def create_solarized_mindmap_from_file(input_filepath, layout='twopi', font='ari
 
 def create_mindmap(graph, outfile_basename, theme, hide_branches_from_id=None, gen_dot_file=False):
     graph_height = graph.height
-    g = pydot.Dot(root=graph.content, **theme.graph_style)
+    pygraph = pydot.Dot(root=graph.content, **theme.graph_style)
     for node in graph:
         content = node.content if ':' not in node.content else '"{}"'.format(node.content) # avoid erroneous pydot 'port' detection
-        g.add_node(pydot.Node(content, **theme.node_style(node, graph_height, hide_branches_from_id)))
+        pygraph.add_node(pydot.Node(content, **theme.node_style(node, graph_height, hide_branches_from_id)))
         if node.parent:
             parent_content = node.parent.content if ':' not in node.parent.content else '"{}"'.format(node.parent.content)
-            g.add_edge(pydot.Edge(parent_content, content, **theme.edge_style(node, graph_height, hide_branches_from_id)))
+            pygraph.add_edge(pydot.Edge(parent_content, content, **theme.edge_style(node, graph_height, hide_branches_from_id)))
     if gen_dot_file:
         dot_outfile = '{}.dot'.format(outfile_basename)
         print('Generating', dot_outfile, file=sys.stderr)
-        g.write(dot_outfile, prog='twopi')
+        pygraph.write(dot_outfile, prog='twopi')
     png_outfile = '{}.png'.format(outfile_basename)
     print('Generating', png_outfile, file=sys.stderr)
-    g.write_png(png_outfile, prog='twopi')
+    pygraph.write_png(png_outfile, prog='twopi')
 
 
 class DarkSolarizedTheme:
@@ -66,11 +66,11 @@ class DarkSolarizedTheme:
 
     def __init__(self, layout, font):
         self.graph_style = dict(
-            layout = layout,
-            overlap = 'false',
-            splines = 'curved',
-            fontname = font,
-            bgcolor = self.DARKGREYBLUE,
+            layout=layout,
+            overlap='false',
+            splines='curved',
+            fontname=font,
+            bgcolor=self.DARKGREYBLUE,
         )
 
     def edge_style(self, dest_node, graph_height, hide_branches_from_id=None):

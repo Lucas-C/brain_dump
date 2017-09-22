@@ -1,6 +1,6 @@
 # USAGE: py.test tests/test_wisemapping_xml.py
 
-from braindump.wisemapping_xml import topic_from_line, Topic
+from brain_dump.wisemapping_xml import topic_from_line, Topic
 
 import pytest
 

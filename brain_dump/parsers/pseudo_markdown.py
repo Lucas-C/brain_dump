@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 
-from pyparsing import CharsNotIn, Empty, Forward, Keyword, Literal, OneOrMore, Optional, QuotedString, Suppress, Token, White, Word, ZeroOrMore, delimitedList, nums, printables, ParseException
+# pylint: disable=expression-not-assigned,invalid-name
+
+from pyparsing import CharsNotIn, Forward, Keyword, Literal, OneOrMore, Optional, QuotedString, Suppress, Token, White, Word, ZeroOrMore, delimitedList, nums, printables, ParseException
 
 
 class StopOnSuffix(Token): # inspired by CharsNotIn

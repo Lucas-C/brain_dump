@@ -1,6 +1,6 @@
 # USAGE: py.test tests/test_pseudo_markdown_parser.py
 
-from braindump.parsers.pseudo_markdown import LineGrammar
+from brain_dump.parsers.pseudo_markdown import LineGrammar
 
 import pytest
 

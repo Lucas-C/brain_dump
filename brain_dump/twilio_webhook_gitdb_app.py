@@ -10,7 +10,7 @@
 #   curl -v -XPOST -F Body=Foo $ENDPOINT
 #   curl -v -XPOST -F Body=Foo.Foo$'\n'Bar $ENDPOINT
 
-import cgi, logging, logging.handlers, os, subprocess, traceback
+import cgi, html, logging, logging.handlers, os, subprocess, traceback
 from contextlib import contextmanager
 from threading import Lock
 from .parsers.indented_text_graph import parse as parse_text_graph
@@ -50,13 +50,14 @@ def application(env, start_response):
     form = pop_form(env)
     log('Handling request: {} "{}" with query_params: "{}", form: "{}"'.format(method, path, query_params, form))
     http_return_code = '200 OK'
+    # pylint: disable=broad-except
     try:
         response = handle_request(method, path, query_params, form)
     except Exception:
         error_msg = traceback.format_exc()
         log('[ERROR] : {}'.format(error_msg), logging.ERROR)
         http_return_code = '500 Internal Server Error'
-        response = cgi.escape(error_msg)
+        response = html.escape(error_msg)
     start_response(http_return_code, [('Content-Type', 'application/xml')])
     return [wrap_in_twiml(response).encode('utf8')]
 

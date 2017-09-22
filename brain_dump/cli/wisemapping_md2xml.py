@@ -2,8 +2,8 @@
 
 import argparse
 
-from braindump.parsers.indented_text_graph import parse as parse_text_graph
-from braindump.wisemapping_xml import recursively_print_map
+from brain_dump.parsers.indented_text_graph import parse as parse_text_graph
+from brain_dump.wisemapping_xml import recursively_print_map
 
 
 PALETTES = {
@@ -21,7 +21,7 @@ PALETTES = {
 }
 
 def main(argv=None):
-    args = parse_args(argv=None)
+    args = parse_args(argv)
     args.palette = None if args.palette == 'none' else PALETTES[args.palette]
     with open(args.input_filepath, encoding='utf8') as text_file:
         graph = parse_text_graph(text_file.read())

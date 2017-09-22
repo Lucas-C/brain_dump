@@ -31,7 +31,7 @@ def extract_and_print_topics(node, args, height, counter, indent='', branch_id=N
         if args.shrink:
             attrs['shrink'] = 'true'
     topic = topic_from_line(node.content,
-                            id=next(counter),
+                            tid=next(counter),
                             edge_colors=args.palette,
                             edge_width=2+2*(height-indent.count('    ')) if args.shrinking_edges else None,
                             branch_id=branch_id,
@@ -44,19 +44,19 @@ def extract_and_print_topics(node, args, height, counter, indent='', branch_id=N
     for icon in topic.icons:
         print('{}    <icon id="{}"/>'.format(indent, icon))
     yield topic
-    for order, child in enumerate(node.children):
-        yield from extract_and_print_topics(child, args, height=height, counter=counter, indent=indent, branch_id=branch_id, order=order)
+    for child_order, child in enumerate(node.children):
+        yield from extract_and_print_topics(child, args, height=height, counter=counter, indent=indent, branch_id=branch_id, order=child_order)
     print('{}</topic>'.format(indent))
 
-def topic_from_line(text_line, id=0, edge_width=None, edge_colors=None, branch_id=None, default_attrs=None, default_img_size='', font_color=''):
+def topic_from_line(text_line, tid=0, edge_width=None, edge_colors=None, branch_id=None, default_attrs=None, default_img_size='', font_color=''):
     parsed_line = LineGrammar.parseString(text_line, parseAll=True)
     link = parsed_line.url
     attrs = {}
     if default_attrs:
         attrs.update(default_attrs)
-    for kv in parsed_line.attrs.split():
-        k, v = kv.split('=')
-        attrs[k.strip()] = v.strip()[1:-1]
+    for key_value in parsed_line.attrs.split():
+        key, value = key_value.split('=')
+        attrs[key.strip()] = value.strip()[1:-1]
     if parsed_line.is_img:
         attrs['shape'] = 'image'
         img_size = '{}x{}'.format(int(parsed_line.img_width), int(parsed_line.img_height)) if parsed_line.img_width and parsed_line.img_height else default_img_size
@@ -73,15 +73,15 @@ def topic_from_line(text_line, id=0, edge_width=None, edge_colors=None, branch_i
     if parsed_line.has_checkbox:
         icons = icons + ('tick_tick' if parsed_line.is_checked else 'tick_cross',)
     see = [dest_text.strip() for dest_text in list(parsed_line.see)]
-    return Topic(text=(parsed_line.text or [''])[0].strip(), id=id, link=link or None, icons=icons, attrs=attrs, see=see)
+    return Topic(text=(parsed_line.text or [''])[0].strip(), id=tid, link=link or None, icons=icons, attrs=attrs, see=see)
 
 def set_font_style_attr(attrs, parsed_line, default_font_color):
-    font_size, font_family, font_color, bold, italic  = '', '', '', '', ''
+    font_size, font_family, font_color, bold, italic = '', '', '', '', ''
     if 'fontStyle' in attrs:
         font_size, font_family, font_color, bold, italic, _ = attrs['fontStyle'].split(';')
     if not font_color:
         font_color = default_font_color
-    is_bold, is_italic, is_striked = bool(parsed_line.is_bold), bool(parsed_line.is_italic), bool(parsed_line.is_striked)
+    is_bold, is_italic, _ = bool(parsed_line.is_bold), bool(parsed_line.is_italic), bool(parsed_line.is_striked)
     if is_bold:
         bold = 'bold'
     if is_italic:

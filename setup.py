@@ -33,12 +33,12 @@ with io.open(path.join(parent_dir, 'requirements.txt')) as requirements_file:
     requirements = requirements_file.readlines()
 
 setup(
-    name='braindump',
+    name='brain_dump',
     description='Tools to generate mindmaps compatible from markdown-like text files, either as PNG with graphviz or as wisemapping-compatible XMLs',
     long_description=rst_readme + '\n\n' + rst_changelog,
     author='Lucas Cimon',
     author_email='lucas.cimon+pypi@@gmail.com',
-    url='http://github.com/Lucas-C/braindump',
+    url='http://github.com/Lucas-C/brain_dump',
     install_requires=requirements,
     packages=find_packages(),
     version=version,
@@ -63,9 +63,9 @@ setup(
     include_package_data=True,  # Active la prise en compte du fichier MANIFEST.in
     entry_points={
         'console_scripts': [
-            'graphviz_md2png = braindump.cli.graphviz_md2png:main',
-            'wisemapping_md2xml = braindump.cli.wisemapping_md2xml:main',
-            'wisemapping_wxml2xml = braindump.cli.wisemapping_wxml2xml:main',
+            'graphviz_md2png = brain_dump.cli.graphviz_md2png:main',
+            'wisemapping_md2xml = brain_dump.cli.wisemapping_md2xml:main',
+            'wisemapping_wxml2xml = brain_dump.cli.wisemapping_wxml2xml:main',
         ],
     },
 )

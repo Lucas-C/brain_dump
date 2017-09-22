@@ -31,17 +31,17 @@ Usage
 Deployment
 ==========
 
-`upstart` job using `pew` & `uwsgi`: `/etc/init/braindump.conf`
+`upstart` job using `pew` & `uwsgi`: `/etc/init/brain_dump.conf`
 ```
 start on startup
 
 script
     set -o errexit -o nounset -o xtrace
-    cd /path/to/braindump
+    cd /path/to/brain_dump
     exec >> upstart-stdout.log
     exec 2>> upstart-stderr.log
     date
-    LANG=fr_FR.UTF-8 HOME=$PWD pew-in brain_dump uwsgi --buffer-size 8000 --http :80 --manage-script-name --mount /webhook=braindump/twilio_webhook_gitdb_app.py
+    LANG=fr_FR.UTF-8 HOME=$PWD pew-in brain_dump uwsgi --buffer-size 8000 --http :80 --manage-script-name --mount /webhook=brain_dump/twilio_webhook_gitdb_app.py
 end script
 ```
 
@@ -63,9 +63,9 @@ Unit tests (executed by `pre-commit run`):
     py.test
 
 
-.. |pypi_version_img| image:: https://img.shields.io/pypi/v/braindump.svg?style=flat
-   :target: https://pypi.python.org/pypi/braindump
-.. |pypi_license_img| image:: https://img.shields.io/pypi/l/braindump.svg?style=flat
-   :target: https://pypi.python.org/pypi/braindump
-.. |travis_build_status| image:: https://travis-ci.org/voyages-sncf-technologies/braindump.svg?branch=master
-    :target: https://travis-ci.org/voyages-sncf-technologies/braindump
+.. |pypi_version_img| image:: https://img.shields.io/pypi/v/brain_dump.svg?style=flat
+   :target: https://pypi.python.org/pypi/brain_dump
+.. |pypi_license_img| image:: https://img.shields.io/pypi/l/brain_dump.svg?style=flat
+   :target: https://pypi.python.org/pypi/brain_dump
+.. |travis_build_status| image:: https://travis-ci.org/Lucas-C/brain_dump.svg?branch=master
+    :target: https://travis-ci.org/Lucas-C/brain_dump

@@ -2,13 +2,13 @@
 
 import argparse, shutil, subprocess, sys
 
-from braindump.graphviz import create_solarized_mindmap_from_file
+from brain_dump.graphviz import create_solarized_mindmap_img
 
 
 def main(argv=None):
     print('Using command:', subprocess.check_output([shutil.which('twopi'), '-V'], stderr=subprocess.STDOUT).decode('utf8'), end='', file=sys.stderr)
     args = parse_args(argv)
-    create_solarized_mindmap_from_file(**args.__dict__)
+    create_solarized_mindmap_img(**args.__dict__)
 
 def parse_args(argv=None):
     parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter, fromfile_prefix_chars='@')

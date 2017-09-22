@@ -1,6 +1,6 @@
 # USAGE: py.test tests/test_indented_text_graph_parser.py
 
-from braindump.parsers.indented_text_graph import parse as parse_graph
+from brain_dump.parsers.indented_text_graph import parse as parse_graph
 
 import pytest
 
