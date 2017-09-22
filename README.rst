@@ -45,7 +45,7 @@ script
 end script
 ```
 
-    
+
 Contributing
 ============
 
