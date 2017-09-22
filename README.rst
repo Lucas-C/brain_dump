@@ -10,7 +10,7 @@ For more information, I wrote some [blog posts](https://chezsoi.org/lucas/blog/t
 
 
 Table of Contents
-================
+=================
 
 .. contents::
 
@@ -31,19 +31,20 @@ Usage
 Deployment
 ==========
 
-`upstart` job using `pew` & `uwsgi`: `/etc/init/brain_dump.conf`
-```
-start on startup
+``upstart`` job using ``pew`` & ``uwsgi``: ``/etc/init/brain_dump.conf``
 
-script
-    set -o errexit -o nounset -o xtrace
-    cd /path/to/brain_dump
-    exec >> upstart-stdout.log
-    exec 2>> upstart-stderr.log
-    date
-    LANG=fr_FR.UTF-8 HOME=$PWD pew-in brain_dump uwsgi --buffer-size 8000 --http :80 --manage-script-name --mount /webhook=brain_dump/twilio_webhook_gitdb_app.py
-end script
-```
+::
+
+    start on startup
+
+    script
+        set -o errexit -o nounset -o xtrace
+        cd /path/to/brain_dump
+        exec >> upstart-stdout.log
+        exec 2>> upstart-stderr.log
+        date
+        LANG=fr_FR.UTF-8 HOME=$PWD pew-in brain_dump uwsgi --buffer-size 8000 --http :80 --manage-script-name --mount /webhook=brain_dump/twilio_webhook_gitdb_app.py
+    end script
 
 
 Contributing
