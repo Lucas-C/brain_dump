@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-from __future__ import print_function
 import argparse, shutil, subprocess, sys
 
 from brain_dump.graphviz import create_solarized_mindmap_img

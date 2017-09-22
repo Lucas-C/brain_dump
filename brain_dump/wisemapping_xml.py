@@ -45,8 +45,7 @@ def extract_and_print_topics(node, args, height, counter, indent='', branch_id=N
         print('{}    <icon id="{}"/>'.format(indent, icon))
     yield topic
     for child_order, child in enumerate(node.children):
-        for child_topic in extract_and_print_topics(child, args, height=height, counter=counter, indent=indent, branch_id=branch_id, order=child_order):
-            yield child_topic
+        yield from extract_and_print_topics(child, args, height=height, counter=counter, indent=indent, branch_id=branch_id, order=child_order)
     print('{}</topic>'.format(indent))
 
 def topic_from_line(text_line, tid=0, edge_width=None, edge_colors=None, branch_id=None, default_attrs=None, default_img_size='', font_color=''):

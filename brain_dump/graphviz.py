@@ -18,7 +18,6 @@
 #         fc-list
 # POTENTIAL EXTRA FEATURES: support for basic bold/italic Markdown markup: http://stackoverflow.com/a/30200953/636849
 
-from __future__ import print_function
 import locale, pydot, sys
 from .parsers.indented_text_graph import parse as parse_text_graph
 
