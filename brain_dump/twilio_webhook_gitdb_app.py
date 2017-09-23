@@ -42,7 +42,7 @@ def log(msg, lvl=logging.INFO):
 
 _LOGGER = configure_logger()
 _LOGGER_LOCK = Lock()
-_MINDMAP_LOCK = Lock()
+_TXT_DB_LOCK = Lock()
 log('Starting. Txt db file: ' + TXT_DB_FILEPATH)
 
 
@@ -107,10 +107,10 @@ def handle_request(method, path, query_params, form):
     db_put(key, *new_value.splitlines())
 
 def db_get(key):
-    with fetch_graph() as graph:
-        node = get_node_with_content(graph, key)
-        if node:
-            return '\n'.join(child.content for child in node.children)
+    graph = read_graph_from_txt_db()
+    node = get_node_with_content(graph, key)
+    if node:
+        return '\n'.join(child.content for child in node.children)
 
 def db_put(key, *values):
     git('pull')
@@ -132,23 +132,18 @@ def git(*args):
 
 @contextmanager
 def fetch_graph():
-    with _MINDMAP_LOCK:
-        with open(TXT_DB_FILEPATH, encoding='utf8') as txt_file:
-            graph = parse_text_graph(txt_file.read())
+    with _TXT_DB_LOCK:
+        graph = read_graph_from_txt_db()
         yield graph
-        with open(TXT_DB_FILEPATH, 'wb') as txt_file:
-            txt_file.write(str(graph).encode('utf8'))
+        write_graph_to_txt_db(graph)
 
 def get_node_with_content(graph, content):
     return next((node for node in graph.children if node.content == content), None)
 
-def remove_line_containing(key, words):
-    with fetch_graph() as graph:
-        node = get_node_with_content(graph, key)
-        if not node:
-            raise KeyError(key)
-        if not any(words in child.content for child in node.children):
-            raise KeyError(words)
-        node.children = [child for child in node.children if words not in child.content]
-        if not node.children:
-            graph.children = [child for child in graph.children if child != node]
+def read_graph_from_txt_db():
+    with open(TXT_DB_FILEPATH, encoding='utf8') as txt_file:
+        return parse_text_graph(txt_file.read())
+
+def write_graph_to_txt_db(graph):
+    with open(TXT_DB_FILEPATH, 'wb') as txt_file:
+        txt_file.write(str(graph).encode('utf8'))
