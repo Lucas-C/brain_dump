@@ -12,7 +12,7 @@
 #   curl -v -XPOST -F Body=Foo $ENDPOINT
 #   curl -v -XPOST -F Body=Foo.Foo$'\n'Bar $ENDPOINT
 
-import cgi, html, logging, logging.handlers, os, subprocess, traceback
+import cgi, html, logging, logging.handlers, os, shlex, subprocess, traceback
 from contextlib import contextmanager
 from threading import Lock
 from brain_dump.parsers.indented_text_graph import parse as parse_text_graph
@@ -128,7 +128,7 @@ def db_put(key, *values):
     git('push')
 
 def git(*args):
-    log(subprocess.check_output((GIT_CMD_PATH,) + args, stderr=subprocess.STDOUT).decode('utf8'))
+    log(subprocess.check_output((GIT_CMD_PATH,) + shlex.escape(args), stderr=subprocess.STDOUT).decode('utf8'))
 
 @contextmanager
 def fetch_graph():
