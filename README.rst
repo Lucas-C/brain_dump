@@ -39,11 +39,12 @@ Deployment
 
     script
         set -o errexit -o nounset -o xtrace
-        cd /path/to/brain_dump
+        cd /path/to/git/dir
         exec >> upstart-stdout.log
         exec 2>> upstart-stderr.log
         date
-        LANG=fr_FR.UTF-8 HOME=$PWD pew-in brain_dump uwsgi --buffer-size 8000 --http :80 --manage-script-name --mount /webhook=brain_dump/twilio_webhook_gitdb_app.py
+        APP_SCRIPT=$(dirname $(pew-in brain_dump python -c 'import brain_dump; print(brain_dump.__file__)'))/twilio_webhook_gitdb_app.py
+        LANG=fr_FR.UTF-8 pew-in brain_dump uwsgi --buffer-size 8000 --http :8087 --manage-script-name --mount /webhook=$APP_SCRIPT
     end script
 
 

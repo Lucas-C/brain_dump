@@ -1,7 +1,9 @@
 #!/usr/bin/python
 
 # Asumptions:
-# - the directory containing this script must contain a git repo
+# - the directory when this app is launched contains:
+#   * a git repo
+#   * a versionned `brain_dump.txt` file
 # - GIT_CMD_PATH exists
 
 # Typical use case scenario:
@@ -13,15 +15,16 @@
 import cgi, html, logging, logging.handlers, os, subprocess, traceback
 from contextlib import contextmanager
 from threading import Lock
-from .parsers.indented_text_graph import parse as parse_text_graph
+from brain_dump.parsers.indented_text_graph import parse as parse_text_graph
 try:
     from urlparse import parse_qsl
 except ImportError:
     from urllib.parse import parse_qsl
 
-LOG_FILE = os.path.join(os.path.dirname(__file__) or '.', __file__.replace('.py', '.log'))
+ROOT_DIR = os.getcwd()
+LOG_FILE = os.path.join(ROOT_DIR, __file__.replace('.py', '.log'))
 LOG_FORMAT = '%(asctime)s - %(process)s [%(levelname)s] %(filename)s %(lineno)d %(message)s'
-TXT_DB_FILEPATH = __file__.replace('.py', '.txt')
+TXT_DB_FILEPATH = os.path.join(ROOT_DIR, 'brain_dump.txt')
 GIT_CMD_PATH = '/usr/bin/git'
 
 
