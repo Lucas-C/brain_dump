@@ -47,21 +47,27 @@ Deployment
     end script
 
 
+Changelog
+=========
+
+https://github.com/Lucas-C/brain_dump/blob/master/CHANGELOG.md
+
+
 Contributing
 ============
-
-`pre-commit hooks <http://pre-commit.com>`__ installation:
 
 ::
 
     pip install -r dev-requirements
     pre-commit install
 
-Unit tests (executed by `pre-commit run`):
+The 2nd command install the `pre-commit hooks <http://pre-commit.com>`__
+
+To only execute a single unit test:
 
 ::
 
-    py.test
+    py.test -k 'test_topic_from_line[toto-expected_topic0]'
 
 
 .. |pypi_version_img| image:: https://img.shields.io/pypi/v/brain_dump.svg?style=flat
