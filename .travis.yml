@@ -1,4 +1,8 @@
 language: python
-python: "3.6"
+python:
+  - "3.6"
+# https://snarky.ca/how-to-use-your-project-travis-to-help-test-python-itself/
+  - "3.6-dev"
+  - "3.7-dev"
 install: pip install . -r dev-requirements.txt
 script: pre-commit run --all-files
