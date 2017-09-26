@@ -128,7 +128,7 @@ def db_put(key, *values):
     git('push')
 
 def git(*args):
-    log(subprocess.check_output((GIT_CMD_PATH,) + shlex.escape(args), stderr=subprocess.STDOUT).decode('utf8'))
+    log(subprocess.check_output((GIT_CMD_PATH,) + shlex.quote(args), stderr=subprocess.STDOUT).decode('utf8'))
 
 @contextmanager
 def fetch_graph():
