@@ -1,4 +1,4 @@
-|pypi_version_img| |pypi_license_img| |travis_build_status|
+|pypi_version_img| |pypi_license_img| |travis_build_status| |snyk_deps_status|
 
 Tools to generate mindmaps compatible from markdown-like text files, either as PNG with graphviz or as wisemapping-compatible XMLs.
 
@@ -77,3 +77,5 @@ To only execute a single unit test:
    :target: https://pypi.python.org/pypi/brain_dump
 .. |travis_build_status| image:: https://travis-ci.org/Lucas-C/brain_dump.svg?branch=master
     :target: https://travis-ci.org/Lucas-C/brain_dump
+.. |snyk_deps_status| image:: https://snyk.io/test/github/lucas-c/brain_dump/badge.svg
+    :target: https://snyk.io/test/github/lucas-c/brain_dump
