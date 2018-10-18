@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.4] - 2018-10-18
+### Fixed
+- ModuleNotFoundError: No module named 'brain_dump.cli' - cf. https://github.com/Lucas-C/brain_dump/issues/2
+
 ## [1.1.3] - 2017-09-23
 ### Fixed
 - import fix in `twilio_webhook_gitdb_app.py`
