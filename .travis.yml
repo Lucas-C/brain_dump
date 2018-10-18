@@ -4,7 +4,7 @@ python:
 # https://snarky.ca/how-to-use-your-project-travis-to-help-test-python-itself/
   - "3.6-dev"
   - "3.7-dev"
-install: pip install . -r dev-requirements.txt
+install: curl -sSL https://raw.githubusercontent.com/sdispater/poetry/master/get-poetry.py | python
 script:
   - pre-commit run --all-files
   - wisemapping_md2xml examples/basics.md
