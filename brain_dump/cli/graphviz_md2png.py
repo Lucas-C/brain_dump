@@ -6,7 +6,10 @@ from brain_dump.graphviz import create_solarized_mindmap_img
 
 
 def main(argv=None):
-    print('Using command:', subprocess.check_output([shutil.which('twopi'), '-V'], stderr=subprocess.STDOUT).decode('utf8'), end='', file=sys.stderr)
+    twopi_cmd_path = shutil.which('twopi')
+    if not twopi_cmd_path:
+        raise EnvironmentError('"twopi" command not available')
+    print('Using command:', subprocess.check_output([twopi_cmd_path, '-V'], stderr=subprocess.STDOUT).decode('utf8'), end='', file=sys.stderr)
     args = parse_args(argv)
     create_solarized_mindmap_img(**args.__dict__)
 
