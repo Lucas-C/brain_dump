@@ -35,7 +35,7 @@ def create_mindmap(graph, outfile_basename, theme, hide_branches_from_id=None, g
     graph_height = graph.height
     pygraph = pydot.Dot(root=graph.content, **theme.graph_style)
     for node in graph:
-        content = node.content if ':' not in node.content else '"{}"'.format(node.content) # avoid erroneous pydot 'port' detection
+        content = pydot.quote_if_necessary(node.content) # avoid erroneous pydot 'port' detection + workaround this: https://github.com/erocarrera/pydot/issues/187
         pygraph.add_node(pydot.Node(content, **theme.node_style(node, graph_height, hide_branches_from_id)))
         if node.parent:
             parent_content = node.parent.content if ':' not in node.parent.content else '"{}"'.format(node.parent.content)

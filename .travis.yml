@@ -5,4 +5,9 @@ python:
   - "3.6-dev"
   - "3.7-dev"
 install: pip install . -r dev-requirements.txt
-script: pre-commit run --all-files
+script:
+  - pre-commit run --all-files
+  - wisemapping_md2xml examples/basics.md
+  - wisemapping_md2xml examples/icons.md
+  - wisemapping_md2xml examples/welcome.md
+  - graphviz_md2png examples/seasons.md
