@@ -105,12 +105,14 @@ def handle_request(method, path, query_params, form):
         return key + '\n' + current_value
     log('PUT key="{}":value="{}"'.format(key, new_value))
     db_put(key, *new_value.splitlines())
+    return None
 
 def db_get(key):
     graph = read_graph_from_txt_db()
     node = get_node_with_content(graph, key)
     if node:
         return '\n'.join(child.content for child in node.children)
+    return None
 
 def db_put(key, *values):
     git('pull')

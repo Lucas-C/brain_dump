@@ -1,3 +1,29 @@
 [build-system]
 # Minimum requirements for the build system to execute (PEP 518)
 requires = ["setuptools", "wheel"]  # PEP 508 specifications.
+
+[tool.poetry]
+name = 'brain_dump'
+version = '1.1.4'
+description = 'Tools to generate mindmaps compatible from markdown-like text files, either as PNG with graphviz or as wisemapping-compatible XMLs'
+readme = 'README.md'
+authors = ['Lucas Cimon']
+repository = 'http://github.com/Lucas-C/brain_dump'
+license = 'GPL-3.0'
+keywords = ['mindmap', 'graph', 'markdown', 'graphviz', 'parser']
+
+[tool.poetry.dependencies]
+python = '^3.6'
+pydot = '*'
+pyparsing = '*'
+
+[tool.poetry.dev-dependencies]
+pre-commit = '*'
+pytest = '*'
+pytest-cov = '*'
+pytest-pythonpath = '*'
+
+[tool.poetry.scripts]
+graphviz_md2png = 'brain_dump.cli.graphviz_md2png:main'
+wisemapping_md2xml = 'brain_dump.cli.wisemapping_md2xml:main'
+wisemapping_wxml2xml = 'brain_dump.cli.wisemapping_wxml2xml:main'

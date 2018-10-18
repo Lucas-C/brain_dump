@@ -30,6 +30,7 @@ def extract_and_print_topics(node, args, height, counter, indent='', branch_id=N
             branch_id = order
         if args.shrink:
             attrs['shrink'] = 'true'
+    # pylint: disable=stop-iteration-return
     topic = topic_from_line(node.content,
                             tid=next(counter),
                             edge_colors=args.palette,

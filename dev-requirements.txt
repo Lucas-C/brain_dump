@@ -1,5 +1,0 @@
--e .
-pre-commit
-pytest
-pytest-cov
-pytest-pythonpath

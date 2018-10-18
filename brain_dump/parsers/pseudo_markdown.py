@@ -29,6 +29,7 @@ class StopOnSuffix(Token): # inspired by CharsNotIn
             suffix_length = len(suffix)
             if suffix == instring[loc:loc+suffix_length]:
                 return True
+        return False
 
 Bold = Suppress(Literal('**'))
 Italic = Suppress(Literal('__'))
