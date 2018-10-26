@@ -8,7 +8,7 @@ A viewer for those can be found here: <https://github.com/Lucas-C/wisemapping-mi
 Also include a [Twilio](<https://www.twilio.com>) webhook that can
 receive updates for such markdown-like mindmap files, stored in git.
 
-For more information, I wrote some [blog posts](<https://chezsoi.org/lucas/blog/tag/mindmap/>)
+For more information, I wrote some [blog posts](<https://chezsoi.org/lucas/blog/tag/mindmap.html>)
 explaining the role of those scripts.
 
 Usage
