@@ -43,7 +43,7 @@ def log(msg, lvl=logging.INFO):
 _LOGGER = configure_logger()
 _LOGGER_LOCK = Lock()
 _TXT_DB_LOCK = Lock()
-log('Starting. Txt db file: ' + TXT_DB_FILEPATH)
+log('Starting. Txt db file: {} Log file: {}'.format(TXT_DB_FILEPATH, LOG_FILE))
 
 
 def application(env, start_response):
