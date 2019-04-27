@@ -18,6 +18,7 @@ pydot = '*'
 pyparsing = '*'
 
 [tool.poetry.dev-dependencies]
+coverage = '*'
 pre-commit = '*'
 pytest = '*'
 pytest-cov = '*'
