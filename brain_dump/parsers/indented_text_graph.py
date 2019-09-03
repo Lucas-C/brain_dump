@@ -124,3 +124,7 @@ class GraphNode:
         yield self
         for child in self.children:
             yield from child
+
+if __name__ == '__main__':
+    with open(sys.argv[1]) as txt_file:
+        print(parse(txt_file.read()))

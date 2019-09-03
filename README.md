@@ -14,12 +14,16 @@ explaining the role of those scripts.
 Usage
 =====
 
+Converting a Markdown indented mind map to wisemapping-compatible XML:
+
     wisemapping_md2xml examples/welcome.md > welcome.xml
+
+Converting a Markdown indented mind map to a Graphviz graph:
 
     graphviz_md2png examples/seasons.md
 
-Deployment
-==========
+Twilio web hook deployment
+==========================
 
 `upstart` job using `pew` & `uwsgi`: `/etc/init/brain_dump.conf`
 
