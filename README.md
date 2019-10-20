@@ -39,6 +39,18 @@ Twilio web hook deployment
         LANG=fr_FR.UTF-8 pew-in brain_dump uwsgi --buffer-size 8000 --http :8087 --manage-script-name --mount /webhook=$APP_SCRIPT
     end script
 
+`systemd` job using `pew` with a virtual env named `brain_dump` & `uwsgi`: `/etc/systemd/system/brain_dump.service`
+
+    [Unit]
+    Description=brain_dump
+
+    [Service]
+    WorkingDirectory=/root/brain_dump
+    Environment=LANG=fr_FR.UTF-8
+    ExecStart=/usr/local/bin/pew in brain_dump uwsgi --need-app --buffer-size 8000 --http :8087 --manage-script-name --pythonpath=
+    /root/.local/share/virtualenvs/brain_dump/lib/python3.6/site-packages/brain_dump --mount /webhook=twilio_webhook_gitdb_app:application                                                                                                                      Restart=always
+
+
 Changelog
 =========
 
