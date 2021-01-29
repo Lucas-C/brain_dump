@@ -1,0 +1,37 @@
+name: build
+
+on:  # cf. https://github.community/t/how-to-trigger-an-action-on-push-or-pull-request-but-not-both/16662
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+      - name: Set up Python ${{ matrix.python-version }} 🔧
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies ⚙️
+        run: |
+          sudo apt-get install graphviz
+          curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+          $HOME/.poetry/bin/poetry install
+      - name: Execute all pre-commit hooks on all files ☑
+        run: pre-commit run --all-files
+      - name: Testing scripts ☑
+        run: |
+          wisemapping_md2xml examples/basic.md
+          wisemapping_md2xml examples/icons.md
+          wisemapping_md2xml examples/welcome.md
+          graphviz_md2png examples/seasons.md

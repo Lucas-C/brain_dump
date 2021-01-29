@@ -1,4 +1,5 @@
-[![pypi\_version\_img](https://img.shields.io/pypi/v/brain_dump.svg?style=flat)](https://pypi.python.org/pypi/brain_dump) [![pypi\_license\_img](https://img.shields.io/pypi/l/brain_dump.svg?style=flat)](https://pypi.python.org/pypi/brain_dump) [![travis\_build\_status](https://travis-ci.org/Lucas-C/brain_dump.svg?branch=master)](https://travis-ci.org/Lucas-C/brain_dump) [![snyk\_deps\_status](https://snyk.io/test/github/lucas-c/brain_dump/badge.svg)](https://snyk.io/test/github/lucas-c/brain_dump)
+[![pypi\_version\_img](https://img.shields.io/pypi/v/brain_dump.svg?style=flat)](https://pypi.python.org/pypi/brain_dump) [![pypi\_license\_img](https://img.shields.io/pypi/l/brain_dump.svg?style=flat)](https://pypi.python.org/pypi/brain_dump)
+[![build status](https://github.com/Lucas-C/brain_dump/workflows/build/badge.svg)](https://github.com/Lucas-C/brain_dump/actions?query=branch%3Amaster) [![snyk\_deps\_status](https://snyk.io/test/github/lucas-c/brain_dump/badge.svg)](https://snyk.io/test/github/lucas-c/brain_dump)
 
 Tools to generate mindmaps compatible from markdown-like text files,
 either as PNG with graphviz or as wisemapping-compatible XMLs.
@@ -59,7 +60,8 @@ Changelog
 Contributing
 ============
 
-    pip install -r dev-requirements
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+    $HOME/.poetry/bin/poetry install
     pre-commit install
 
 The 2nd command install the [pre-commit hooks](http://pre-commit.com)
