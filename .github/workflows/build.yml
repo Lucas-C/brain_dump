@@ -30,8 +30,11 @@ jobs:
       - name: Execute all pre-commit hooks on all files ☑
         run: |
           source $($HOME/.poetry/bin/poetry env info --path)/bin/activate
-          rm -f .coverage # avoid CoverageException: Data file '.../.coverage' doesn't seem to be a coverage data file: Couldn't use data file '.../.coverage': no such table: coverage_schema
           pre-commit run --all-files
+      - name: Running tests ☑
+        run: |
+          source $($HOME/.poetry/bin/poetry env info --path)/bin/activate
+          pytest
       - name: Testing scripts ☑
         run: |
           source $($HOME/.poetry/bin/poetry env info --path)/bin/activate
