@@ -28,9 +28,12 @@ jobs:
           curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
           $HOME/.poetry/bin/poetry install
       - name: Execute all pre-commit hooks on all files ☑
-        run: pre-commit run --all-files
+        run: |
+          source $($HOME/.poetry/bin/poetry env info --path)/bin/activate
+          pre-commit run --all-files
       - name: Testing scripts ☑
         run: |
+          source $($HOME/.poetry/bin/poetry env info --path)/bin/activate
           wisemapping_md2xml examples/basic.md
           wisemapping_md2xml examples/icons.md
           wisemapping_md2xml examples/welcome.md
